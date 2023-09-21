@@ -808,5 +808,27 @@
       }
     },
     "models": {}
+  },
+  "text-generation-inference": {
+    "remoteInference": true,
+    "requiresAPIKey":  false,
+    "models": {
+      "falcon40b-instruct": {
+        "enabled": false,
+        "status": "ready",
+        "capabilities": [],
+        "generateURL": "https://classic-sherpa.playment.io/generate",
+
+        "parameters": {
+          "maximumLength": {
+            "value": 20,
+            "range": [
+              20,
+              2048
+            ]
+          }
+        }
+      }
+    }
   }
 }

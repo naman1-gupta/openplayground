@@ -42,6 +42,9 @@ const ParamaterSlider: React.FC<ParameterSliderProps> = ({
   const [value, setValue] = useState(defaultValue) 
   const { isLg } = useBreakpoint("lg")
 
+  console.log("defaultValue", defaultValue);
+  console.log("title", title)
+
   useEffect(() => {
     setValue(defaultValue)
   }, [defaultValue])
