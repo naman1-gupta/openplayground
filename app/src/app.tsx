@@ -154,7 +154,7 @@ const APIContextWrapper = ({children}) => {
   const notificationSubscribers = React.useRef([]);
 
   useEffect(() => {
-    const sse_request = new SSE("/api/notifications")
+    const sse_request = new SSE("api/notifications")
     
     sse_request.addEventListener("notification", (event: any) => {
       const parsedEvent = JSON.parse(event.data);
@@ -166,10 +166,10 @@ const APIContextWrapper = ({children}) => {
   }, [])
 
   const Model = {
-    getAll: async () => (await fetch("/api/models")).json(),
-    getAllEnabled: async () => (await fetch("/api/models-enabled")).json(),
-    toggle: async (provider, model) => (await fetch(`/api/provider/${provider}/model/${encodeURIComponent(model)}/toggle-status`)).json(),
-    search: async (provider, query) => (await fetch(`/api/provider/${provider}/models/search?query=${query}`)).json(),
+    getAll: async () => (await fetch("api/models")).json(),
+    getAllEnabled: async () => (await fetch("api/models-enabled")).json(),
+    toggle: async (provider, model) => (await fetch(`api/provider/${provider}/model/${encodeURIComponent(model)}/toggle-status`)).json(),
+    search: async (provider, query) => (await fetch(`api/provider/${provider}/models/search?query=${query}`)).json(),
   };
 
   const Notifications = {
@@ -182,11 +182,11 @@ const APIContextWrapper = ({children}) => {
   };
   
   const Provider = {
-    setAPIKey: async (provider, apiKey) => (await fetch(`/api/provider/${provider}/api-key`, {method: "PUT", headers: {"Content-Type": "application/json"}, 
+    setAPIKey: async (provider, apiKey) => (await fetch(`api/provider/${provider}/api-key`, {method: "PUT", headers: {"Content-Type": "application/json"}, 
       body: JSON.stringify({apiKey: apiKey})}
     )).json(),
-    getAll: async () => (await fetch("/api/providers")).json(),
-    getAllWithModels: async () => (await fetch("/api/providers-with-key-and-models")).json(),
+    getAll: async () => (await fetch("api/providers")).json(),
+    getAllWithModels: async () => (await fetch("api/providers-with-key-and-models")).json(),
   };
   
   const Inference = {
@@ -214,7 +214,7 @@ const APIContextWrapper = ({children}) => {
   });
   
   function createTextCompletionRequest({prompt, models}) {
-    const url = "/api/inference/text/stream";
+    const url = "api/inference/text/stream";
     const payload = {
       prompt: prompt,
       models: models,
@@ -223,7 +223,7 @@ const APIContextWrapper = ({children}) => {
   }
   
   function createChatCompletionRequest(prompt, model) {
-    const url = "/api/inference/chat/stream";
+    const url = "api/inference/chat/stream";
     const payload = {prompt, model};
     return createCompletionRequest(url, payload, chatCompletionSubscribers);
   }
@@ -603,7 +603,7 @@ function ProviderWithRoutes() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/user/:username/"
         element={
           <APIContextWrapper>
             <PlaygroundContextWrapper key = "playground" page = "playground">
@@ -615,7 +615,7 @@ function ProviderWithRoutes() {
       />
 
       <Route
-        path="/compare"
+        path="/user/:username/compare"
         element={
           <APIContextWrapper>
             <PlaygroundContextWrapper key = "compare" page = "compare">
@@ -627,7 +627,7 @@ function ProviderWithRoutes() {
       />
 
       <Route
-        path="/settings"
+        path="/user/:username/settings"
         element={
           <APIContextWrapper>
             <Settings />
