@@ -48,4 +48,4 @@ COPY pyproject.toml .
 COPY poetry.lock .
 RUN poetry install --without=dev --no-interaction --no-ansi
 
-ENTRYPOINT ["openplayground", "run", "--host", "0.0.0.0", "--env", "/web/config/.env"]
+ENTRYPOINT ["jhsingle-native-proxy", "--destport", "5432", "--", "--destport", "5432", "--", "openplayground", "run", "--host", "0.0.0.0", "--env", "/web/config/.env"]
