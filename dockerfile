@@ -12,7 +12,7 @@ COPY app/src ./src/
 COPY app/* ./
 
 # Build the project
-RUN npx parcel build src/index.html --no-cache --no-source-maps
+RUN npx parcel build src/index.html --no-cache --no-source-maps --public-url ./
 
 # ==== BACKEND ====
 FROM pytorch/pytorch:2.0.0-cuda11.7-cudnn8-runtime
