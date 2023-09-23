@@ -389,7 +389,7 @@ export default function Settings() {
       
       setProviders({
         ...providers,
-        [providerName]: {O
+        [providerName]: {
           ...providers[providerName],
           apiKey
         }
