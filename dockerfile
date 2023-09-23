@@ -17,12 +17,19 @@ RUN npx parcel build src/index.html --no-cache --no-source-maps
 # ==== BACKEND ====
 FROM pytorch/pytorch:2.0.0-cuda11.7-cudnn8-runtime
 
-WORKDIR /web/
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV XDG_CONFIG_HOME=/web/config
+
+WORKDIR /tmp/jhsingle_current
+
+ADD jhproxy/ /tmp/jhsingle_current/
+
+RUN cd /tmp/jhsingle_current && pip3 install -e .
+
+WORKDIR /web/
 
 ARG POETRY_VERSION=1.4.1
 

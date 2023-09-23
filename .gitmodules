@@ -1,0 +1,3 @@
+[submodule "jhproxy"]
+	path = jhproxy
+	url = https://github.com/naman1-gupta/jhsingle-native-proxy.git
